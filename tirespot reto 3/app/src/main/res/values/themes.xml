@@ -16,4 +16,8 @@
         <item name="android:colorControlHighlight">@color/white</item>
 
     </style>
+    <style name="BtnBlanco">
+        <item name="android:colorControlHighlight">@color/azulPrincipal</item>
+        <item name="colorButtonNormal">@color/baige</item>
+    </style>
 </resources>

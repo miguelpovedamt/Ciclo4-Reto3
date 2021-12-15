@@ -12,19 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TireSportApp">
         <activity
-            android:name=".Carrito"
+            android:name=".Vista.Carrito"
             android:exported="false" />
         <activity
-            android:name=".Catalogo"
+            android:name=".Vista.Catalogo"
             android:exported="false" />
         <activity
-            android:name=".sucursales"
+            android:name=".Vista.sucursales"
             android:exported="false" />
         <activity
-            android:name=".servicios"
+            android:name=".Vista.servicios"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Vista.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

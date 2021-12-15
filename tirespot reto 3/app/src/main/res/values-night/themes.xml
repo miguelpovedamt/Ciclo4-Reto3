@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/azulPrincipal</item>
         <item name="colorPrimaryVariant">@color/naranjaPrincipal</item>
-        <item name="colorOnPrimary">@color/naranjaPrincipal</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -15,5 +15,9 @@
         <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:colorControlHighlight">@color/black</item>
 
+    </style>
+    <style name="BtnBlanco">
+        <item name="android:colorControlHighlight">@color/azulPrincipal</item>
+        <item name="colorButtonNormal">@color/baige</item>
     </style>
 </resources>
