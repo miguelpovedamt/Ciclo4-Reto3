@@ -17,8 +17,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.tiresportapp.Controlador.AdaptadorProductos;
-import com.example.tiresportapp.Modelo.Llanta;
-import com.example.tiresportapp.Casodeuso.LlantaActionCase;
+import com.example.tiresportapp.Modelo.Producto;
+import com.example.tiresportapp.Casodeuso.ProductoActionCase;
 import com.example.tiresportapp.Controlador.MyOpenHelper;
 import com.example.tiresportapp.R;
 
@@ -42,11 +42,11 @@ public class Catalogo extends AppCompatActivity {
 
     private ConstraintLayout padre;
 
-    private Llanta llanta;
+    private Producto producto;
 
-    ArrayList<Llanta> listaLlantas;
+    ArrayList<Producto> listaProductos;
 
-    ArrayList<Llanta> listaCarrito;
+    ArrayList<Producto> listaCarrito;
 
     private RecyclerView rcvProd;
 
@@ -82,7 +82,7 @@ public class Catalogo extends AppCompatActivity {
         MyOpenHelper dataBase = new MyOpenHelper(Catalogo.this);
         SQLiteDatabase db = dataBase.getWritableDatabase();
 
-        listaLlantas = LlantaActionCase.consultarProductos(this);
+        listaProductos = ProductoActionCase.consultarProductos(this);
 
         listaCarrito = new ArrayList<>();
 
@@ -93,7 +93,7 @@ public class Catalogo extends AppCompatActivity {
         rcvProd = (RecyclerView) findViewById(R.id.rcvProductos);
         rcvProd.setHasFixedSize(true);
         rcvProd.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        AdaptadorProductos adaptador = new AdaptadorProductos(listaLlantas,this);
+        AdaptadorProductos adaptador = new AdaptadorProductos(listaProductos,this);
         rcvProd.setAdapter(adaptador);
 
     }
@@ -125,6 +125,7 @@ public class Catalogo extends AppCompatActivity {
             case R.id.botonSucursales:
                 Intent sucursales = new Intent(getApplicationContext(), com.example.tiresportapp.Vista.sucursales.class);
                 startActivity(sucursales);
+
                 return true;
 
             case R.id.carrito:

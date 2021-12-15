@@ -32,8 +32,8 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.tiresportapp.Modelo.Llanta;
-import com.example.tiresportapp.Casodeuso.LlantaActionCase;
+import com.example.tiresportapp.Modelo.Producto;
+import com.example.tiresportapp.Casodeuso.ProductoActionCase;
 import com.example.tiresportapp.Controlador.MyOpenHelper;
 import com.example.tiresportapp.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -44,7 +44,7 @@ import java.util.ArrayList;
 
 public class Carrito extends AppCompatActivity {
 
-    ArrayList<Llanta> listaCarrito;
+    ArrayList<Producto> listaCarrito;
     private Double precioTotal;
 
     @Override
@@ -59,7 +59,7 @@ public class Carrito extends AppCompatActivity {
         MyOpenHelper dataBase = new MyOpenHelper(Carrito.this);
         SQLiteDatabase db = dataBase.getWritableDatabase();
 
-        ArrayList<Llanta> listaCarrito =  LlantaActionCase.consultarProductos(this);
+        ArrayList<Producto> listaCarrito =  ProductoActionCase.consultarProductos(this);
         ActionBar barraMenu = getSupportActionBar();
 
         barraMenu.setDisplayShowHomeEnabled(true);
@@ -202,7 +202,7 @@ public class Carrito extends AppCompatActivity {
 
             TextView precioTotalView = new TextView(this);
 
-            for (Llanta l : listaCarrito) {
+            for (Producto l : listaCarrito) {
 
                 if(l.getCantidad()>=1) {
 
@@ -441,13 +441,13 @@ public class Carrito extends AppCompatActivity {
     }
 
 
-    private Boolean verificarCantidad(ArrayList<Llanta> llantas){
+    private Boolean verificarCantidad(ArrayList<Producto> productos){
 
         int contador=0;
 
-        for (Llanta llanta: llantas
+        for (Producto producto : productos
              ) {
-                if(llanta.getCantidad()>=1){
+                if(producto.getCantidad()>=1){
                     contador+=1;
                 }
         }if (contador == 0){
@@ -457,9 +457,9 @@ public class Carrito extends AppCompatActivity {
         }
     }
 
-    private Double calcularTotal(ArrayList<Llanta> listaCar){
+    private Double calcularTotal(ArrayList<Producto> listaCar){
         Double precioTotal = 0.0;
-        for (Llanta l : listaCar
+        for (Producto l : listaCar
              ) {
                 precioTotal += l.getCantidad()*l.getPrecio();
         }
@@ -526,7 +526,7 @@ public class Carrito extends AppCompatActivity {
             builder.setMessage("¿Usted está seguro de vaciar el carrito")
                     .setPositiveButton("SI", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            LlantaActionCase.vaciarCarrito(getActivity());
+                            ProductoActionCase.vaciarCarrito(getActivity());
                             //Toast.makeText(getActivity(), "Usted ha vaciado el carrito", Toast.LENGTH_LONG).show();
                             getActivity().finish();
                             //getActivity().recreate();

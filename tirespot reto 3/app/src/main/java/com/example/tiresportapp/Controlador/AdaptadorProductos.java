@@ -13,18 +13,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tiresportapp.Casodeuso.LlantaActionCase;
-import com.example.tiresportapp.Modelo.Llanta;
+import com.example.tiresportapp.Casodeuso.ProductoActionCase;
+import com.example.tiresportapp.Modelo.Producto;
 import com.example.tiresportapp.R;
 
 import java.util.ArrayList;
 
 public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.ViewHolderProductos>{
 
-    ArrayList<Llanta> productos;
+    ArrayList<Producto> productos;
     Context context;
 
-    public AdaptadorProductos(ArrayList<Llanta> productos,Context context) {
+    public AdaptadorProductos(ArrayList<Producto> productos, Context context) {
 
         this.productos = productos;
         this.context = context;
@@ -41,38 +41,59 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
     public void onBindViewHolder(@NonNull ViewHolderProductos holder, int position) {
 
 
-        Llanta llanta = productos.get(position);
+        Producto producto = productos.get(position);
         holder.prodImagen.setImageResource(productos.get(position).getImagen());
         holder.produNombre.setText(productos.get(position).getNombre());
-        holder.produPrecio.setText(LlantaActionCase.formatearNumero(productos.get(position).getPrecio()));
-        holder.llanta = llanta;
+        holder.produPrecio.setText(ProductoActionCase.formatearNumero(productos.get(position).getPrecio()));
+        holder.producto = producto;
+
+        if(holder.producto.getEstadoFav()==0){
+            holder.btnFavorito.setImageResource(R.drawable.heart);
+        }else {
+            holder.btnFavorito.setImageResource(R.drawable.heart1);
+        }
+
 
         holder.btnFavorito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Se habilitara pronto", Toast.LENGTH_SHORT).show();
+                if(producto.getEstadoFav()==0){
+                    holder.btnFavorito.setImageResource(R.drawable.heart1);
+                    producto.setEstadoFav(1);
+                    ProductoActionCase.setFavorito(producto.getId(),1,context);
+                    Toast.makeText(context, "añadio: "+producto.getNombre()+" a favoritos"+producto.getEstadoFav(), Toast.LENGTH_SHORT).show();
+
+                }else {
+                    holder.btnFavorito.setImageResource(R.drawable.heart);
+                    producto.setEstadoFav(0);
+                    ProductoActionCase.setFavorito(producto.getId(),0,context);
+                    Toast.makeText(context, "quito: "+producto.getNombre()+" de favoritos"+producto.getEstadoFav(), Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 
 
-        holder.contador = llanta.getCantidad();
+        holder.contador = producto.getCantidad();
         holder.btnCarrito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(holder.contador==0){
                     holder.contador+=1;
-                    LlantaActionCase.setCantidad(llanta.getId(),1, context);
+                    ProductoActionCase.setCantidad(producto.getId(),1, context);
                     Toast.makeText(context, "Usted agrego: "+
-                            llanta.getNombre(), Toast.LENGTH_SHORT).show();
+                            producto.getNombre(), Toast.LENGTH_SHORT).show();
                 }else{
                     holder.contador+=1;
-                    LlantaActionCase.setCantidad(llanta.getId(), holder.contador, context);
+                    ProductoActionCase.setCantidad(producto.getId(), holder.contador, context);
                     Toast.makeText(context, "Usted aumento en 1: "+
-                            llanta.getNombre(), Toast.LENGTH_SHORT).show();
+                            producto.getNombre(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -84,7 +105,7 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
         ImageView prodImagen;
         TextView produNombre;
         TextView produPrecio;
-        Llanta llanta;
+        Producto producto;
         Button btnCarrito;
         Integer contador;
         ImageButton btnFavorito;

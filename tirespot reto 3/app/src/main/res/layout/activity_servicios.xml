@@ -50,8 +50,8 @@
                     android:autoSizeTextType="uniform"
                     android:text="Montallantas 24 Horas:
                      \n* Despinchamos Carros a domicilio.
-                     \n*Compra y Venta de llantas.
-                      \n* Se inflan llantas con Nitrógeno."
+                     \n*Compra y Venta de productos.
+                      \n* Se inflan productos con Nitrógeno."
                     android:textColor="@color/azulPrincipal" />
             </TableRow>
 
